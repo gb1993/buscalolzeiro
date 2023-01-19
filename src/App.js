@@ -11,12 +11,11 @@ function App() {
 
   useEffect(() => {
     getInvoker();
-    console.log(summoner)
   },[]);
 
   return (
     <div>
-      teste
+      {summoner.puuid}
     </div>
   );
 }
