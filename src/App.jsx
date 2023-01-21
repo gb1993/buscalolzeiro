@@ -8,13 +8,24 @@ function App() {
   const [hasSummoner, setHasSummoner] = useState({message: '', display: 'none'});
   const [allMatches, setAllMatches] = useState();
   const [listObject, setListObject] = useState();
-  const [puuid, setPuuid] = useState();
+  const [summonerInfo, setSummonerInfo] = useState();
+  const [maps, setMaps] = useState();
+
+  const getMaps = async () => {
+    const response = await fetch('https://static.developer.riotgames.com/docs/lol/queues.json');
+    const data = await response.json();
+    setMaps(data);
+  }
+
+  useEffect(() => {
+    getMaps();
+  },[])
 
   const getSummonerId = async (e) => {
     e.preventDefault();
     const data = await getSummoner(summonerName);
     if (data.message) setHasSummoner({message: data.message, display: 'block'});
-    setPuuid(data.puuid);
+    setSummonerInfo(data);
     getMatchesIds(data.puuid);
   }
 
@@ -31,12 +42,14 @@ function App() {
 
   useEffect(() => {
     const list = allMatches && allMatches.map((match) => {
-      const iAmWinner = match.participants.find((winner) => winner.win === true && winner.puuid === puuid);
+      const iAmWinner = match.participants.find((winner) => winner.win === true && winner.puuid === summonerInfo.puuid);
+      const mapName = maps.find((map) => map.queueId === match.queueId);
+      const myChampion = match.participants.find((me) => me.puuid === summonerInfo.puuid)
       return {
         id: match.gameId,
         gameDuration: Math.floor(match.gameDuration / 60),
-        gameMode: match.gameMode,
-        myName: summonerName,
+        gameMode: mapName.description.slice(0, -5),
+        myChampion: myChampion.championName,
         iAmWinner: iAmWinner !== undefined ? 'green' : 'red',
       }
     });
@@ -45,22 +58,33 @@ function App() {
 
   return (
     <div>
-      <div style={{ width: 200, display: hasSummoner.display, background: 'red' }}>
-        <span>{hasSummoner.message}</span>
-      </div>
       <form>
         <input type="text" name="summoner" id="summoner" onChange={ (e) => setsummonerName(e.target.value)} />
         <button type="submit" onClick={getSummonerId}>Buscar</button>
       </form>
-      <ul style={{margin: '20px'}}>
-        {listObject && listObject.map((match) => (
-          <li key={match.gameId} style={{background: match.iAmWinner, margin: '20px', borderRadius: '5px'}}>
-            <p>{match.gameDuration}</p>
-            <p>{match.gameMode}</p>
-            <p>{match.myName}</p>
-          </li>
-        ))}
-      </ul>
+      <div>
+        {summonerInfo ?
+          <div>
+            <img src={`http://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/${summonerInfo.profileIconId}.png`} alt="Profile icon" />
+            <p>{summonerInfo.name}</p>
+            <p>{summonerInfo.summonerLevel}</p>
+          </div>
+          : ''
+        }
+        <ul style={{margin: '20px'}}>
+          <div style={{ width: 200, display: hasSummoner.display, background: 'red' }}>
+            <span>{hasSummoner.message}</span>
+          </div>
+          {listObject && listObject.map((match, i) => (
+            <li key={match.id} style={{background: match.iAmWinner, margin: '20px', borderRadius: '5px'}}>
+              <p>{match.gameDuration} Minutos</p>
+              <p>{match.gameMode}</p>
+              <img src={`http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${match.myChampion}.png`} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      
     </div>
   );
 }
