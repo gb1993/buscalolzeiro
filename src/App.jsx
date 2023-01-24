@@ -1,25 +1,14 @@
-import React, { useState } from "react";
-import { getSummoner, getMatches, getMatchesLogs } from "./helpers/getData";
+import React, { useState, useEffect } from "react";
+import { getSummoner, getMatches, getMatchesLogs, getMaps } from "./helpers/getData";
 import './global.css';
-import { useEffect } from "react";
 
-function App() {
+const App = () => {
   const [summonerName, setsummonerName] = useState();
   const [hasSummoner, setHasSummoner] = useState({message: '', display: 'none'});
   const [allMatches, setAllMatches] = useState();
   const [listObject, setListObject] = useState();
   const [summonerInfo, setSummonerInfo] = useState();
-  const [maps, setMaps] = useState();
 
-  const getMaps = async () => {
-    const response = await fetch('https://static.developer.riotgames.com/docs/lol/queues.json');
-    const data = await response.json();
-    setMaps(data);
-  }
-
-  useEffect(() => {
-    getMaps();
-  },[])
 
   const getSummonerId = async (e) => {
     e.preventDefault();
@@ -57,6 +46,7 @@ function App() {
   },[allMatches])
 
   return (
+    
     <div>
       <form>
         <input type="text" name="summoner" id="summoner" onChange={ (e) => setsummonerName(e.target.value)} />
