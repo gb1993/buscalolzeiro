@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Index from './pages/index';
 import UserProfile from './pages/UserProfile';
 import NotFound from './pages/NotFound';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
