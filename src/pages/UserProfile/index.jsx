@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { getProfileIcon } from '../../helpers/getStaticData';
-import './userprofile.css';
+import './index.css';
 
 function UserProfile() {
   const { state } = useLocation();
@@ -19,7 +19,7 @@ function UserProfile() {
       </div>
       <ul>
         {state.profileData.map((match) => (
-          <li key={match.id} style={{ background: match.iAmWinner }}>
+          <li key={match.id} className={match.iAmWinner}>
             <p>
               {match.gameDuration}
               Minutos

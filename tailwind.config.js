@@ -1,8 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ['./src/**/*.{jsx,ts,tsx,js}'],
   theme: {
-    extend: {},
+    variants: {
+      fontFamily: ['lolfont'],
+    },
+    fontFamily: {
+      lolfont: ['lolfont', 'system-ui'],
+    },
+    extend: {
+      colors: {
+        dark: '#201E45',
+        neutral: '#404267',
+        opaque: '#E4E4EF',
+        lightred: '#F07B7B',
+        lightblue: '#3d85c6',
+      },
+    },
   },
   plugins: [],
 };

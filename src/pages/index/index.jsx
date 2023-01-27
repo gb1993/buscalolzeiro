@@ -58,7 +58,7 @@ function Index() {
         gameDuration: Math.floor(match.gameDuration / 60),
         gameMode: mapName.description.slice(0, -5),
         myChampion: myChampion.championName,
-        iAmWinner: iAmWinner !== undefined ? 'green' : 'red',
+        iAmWinner: iAmWinner !== undefined ? 'bg-lightblue' : 'bg-lightred',
       };
     });
     setListObject(list);
