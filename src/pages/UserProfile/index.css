@@ -1,13 +1,17 @@
 .profile-container {
-
+  @apply flex justify-between items-center;
 }
 
 .profile-container ul {
+  @apply overflow-y-scroll h-screen w-[1000px];
+}
 
+.profile-container ul li {
+  @apply flex m-10;
 }
 
 .profile-user-container {
-
+  @apply flex;
 }
 
 .profile-user-container button {
@@ -15,7 +19,7 @@
 }
 
 .profile-icon-container img {
-
+  @apply rounded-lg;
 }
 
 .profile-icon-container p {

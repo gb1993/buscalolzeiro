@@ -5,6 +5,16 @@ import './index.css';
 function UserProfile() {
   const { state } = useLocation();
 
+  const handleColor = (isWin, time) => {
+    if (time < 3) {
+      return ('bg-neutral');
+    }
+    if (isWin === false) {
+      return ('bg-lightred');
+    }
+    return ('bg-lightblue');
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-user-container">
@@ -19,13 +29,13 @@ function UserProfile() {
       </div>
       <ul>
         {state.profileData.map((match) => (
-          <li key={match.id} className={match.iAmWinner}>
+          <li key={match.id} className={handleColor(match.me.win, match.gameDuration)}>
             <p>
               {match.gameDuration}
               Minutos
             </p>
             <p>{match.gameMode}</p>
-            <img src={`http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${match.myChampion}.png`} alt="my champion icon" />
+            <img src={`http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${match.me.championName}.png`} alt="my champion icon" />
           </li>
         ))}
       </ul>

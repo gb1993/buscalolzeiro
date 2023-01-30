@@ -38,7 +38,7 @@ function Index() {
   const getSummonerId = async (e) => {
     e.preventDefault();
     const data = await getSummoner(summonerName);
-    if (data.message) {
+    if (data.message && summonerName) {
       return data.message;
     }
     setSummonerInfo(data);
@@ -48,17 +48,13 @@ function Index() {
 
   useEffect(() => {
     const list = allMatches && allMatches.map((match) => {
-      const iAmWinner = match.participants.find(
-        (winner) => winner.win === true && winner.puuid === summonerInfo.puuid,
-      );
       const mapName = maps.find((map) => map.queueId === match.queueId);
-      const myChampion = match.participants.find((me) => me.puuid === summonerInfo.puuid);
+      const me = match.participants.find((i) => i.puuid === summonerInfo.puuid);
       return {
         id: match.gameId,
         gameDuration: Math.floor(match.gameDuration / 60),
         gameMode: mapName.description.slice(0, -5),
-        myChampion: myChampion.championName,
-        iAmWinner: iAmWinner !== undefined ? 'bg-lightblue' : 'bg-lightred',
+        me,
       };
     });
     setListObject(list);
@@ -74,10 +70,17 @@ function Index() {
   }, [listObject]);
 
   return (
-    <form>
-      <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} />
-      <button type="submit" onClick={getSummonerId}>Buscar</button>
-    </form>
+    <>
+      <form>
+        <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} />
+        <button type="submit" onClick={getSummonerId}>Buscar</button>
+      </form>
+      <div className="bg-dark w-16 h-16" />
+      <div className="bg-neutral w-16 h-16" />
+      <div className="bg-opaque w-16 h-16" />
+      <div className="bg-lightred w-16 h-16" />
+      <div className="bg-lightblue w-16 h-16" />
+    </>
   );
 }
 
