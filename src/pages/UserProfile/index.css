@@ -7,7 +7,7 @@
 }
 
 .profile-container ul li {
-  @apply flex m-10;
+  @apply flex m-10 p-5 gap-5;
 }
 
 .profile-user-container {
@@ -24,4 +24,12 @@
 
 .profile-icon-container p {
 
+}
+
+.items-container {
+  @apply flex gap-1;
+}
+
+.items-container img {
+  @apply rounded-lg w-8;
 }

@@ -8,12 +8,15 @@ const getMaps = async () => {
   }
 };
 
-const getChampionIcon = (id) => `http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${id}.png)`;
+const getChampionIcon = (name) => `http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${name}.png`;
 
 const getProfileIcon = (id) => `http://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/${id}.png`;
+
+const getItemIcon = (id) => (id === 0 ? undefined : `http://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/${id}.png`);
 
 export {
   getMaps,
   getChampionIcon,
   getProfileIcon,
+  getItemIcon,
 };
