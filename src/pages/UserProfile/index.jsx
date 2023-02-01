@@ -32,7 +32,7 @@ function UserProfile() {
       <ul>
         {state.profileData.map((match) => (
           <li key={match.id} className={`${handleColor(match.me.win, match.gameDuration)}`}>
-            <div>
+            <div className="w-36">
               <p>{match.gameMode}</p>
               <p>{`${match.gameDuration} minutos`}</p>
             </div>
@@ -52,13 +52,13 @@ function UserProfile() {
                 </div>
               </div>
               <div className="items-container">
-                {getItemIcon(match.me.item0) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item0)} alt="item 1" />}
-                {getItemIcon(match.me.item1) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item1)} alt="item 2" />}
-                {getItemIcon(match.me.item2) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item2)} alt="item 3" />}
-                {getItemIcon(match.me.item3) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item3)} alt="item 4" />}
-                {getItemIcon(match.me.item4) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item4)} alt="item 5" />}
-                {getItemIcon(match.me.item5) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item5)} alt="item 6" />}
-                {getItemIcon(match.me.item6) === undefined ? <div className="h-8 w-8 rounded-lg bg-neutral" /> : <img src={getItemIcon(match.me.item6)} alt="item 7" />}
+                {getItemIcon(match.me.item0) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item0)} alt="item 1" />}
+                {getItemIcon(match.me.item1) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item1)} alt="item 2" />}
+                {getItemIcon(match.me.item2) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item2)} alt="item 3" />}
+                {getItemIcon(match.me.item3) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item3)} alt="item 4" />}
+                {getItemIcon(match.me.item4) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item4)} alt="item 5" />}
+                {getItemIcon(match.me.item5) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item5)} alt="item 6" />}
+                {getItemIcon(match.me.item6) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item6)} alt="item 7" />}
               </div>
             </div>
             <div>

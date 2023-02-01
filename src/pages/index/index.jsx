@@ -70,17 +70,11 @@ function Index() {
   }, [listObject]);
 
   return (
-    <>
-      <form>
-        <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} />
-        <button type="submit" onClick={getSummonerId}>Buscar</button>
-      </form>
-      <div className="bg-dark w-16 h-16" />
-      <div className="bg-neutral w-16 h-16" />
-      <div className="bg-opaque w-16 h-16" />
-      <div className="bg-lightred w-16 h-16" />
-      <div className="bg-lightblue w-16 h-16" />
-    </>
+    <form>
+      <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} />
+      <button type="submit" onClick={getSummonerId}>Buscar</button>
+    </form>
+
   );
 }
 
