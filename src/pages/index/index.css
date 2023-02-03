@@ -1,0 +1,23 @@
+.search-container {
+  @apply w-full h-screen flex justify-center items-center;
+}
+
+form {
+  @apply m-2 max-w-lg w-full flex items-center;
+}
+
+form input {
+  @apply bg-neutral text-opaque rounded-full p-6 w-full outline-none text-lg;
+}
+
+form button {
+  @apply border-l-2 border-[#201E45] pl-2 -ml-16;
+}
+
+.search-icon {
+  @apply h-10 w-10;
+}
+
+.app-hero-container img {
+  @apply max-w-xs;
+}

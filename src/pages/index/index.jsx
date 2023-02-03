@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IconContext } from 'react-icons';
+import { MdOutlinePersonSearch } from 'react-icons/md';
 import { getSummoner, getMatches, getMatchesLogs } from '../../helpers';
 import { getMaps } from '../../helpers/getStaticData';
 import './index.css';
@@ -11,6 +13,7 @@ function Index() {
   const [allMatches, setAllMatches] = useState();
   const [listObject, setListObject] = useState();
   const navigate = useNavigate();
+  const searchIcon = useMemo(() => ({ className: 'search-icon' }), []);
 
   const getAllMaps = async () => {
     const allmaps = await getMaps();
@@ -55,6 +58,7 @@ function Index() {
         gameDuration: Math.floor(match.gameDuration / 60),
         gameMode: mapName.description.slice(0, -5),
         me,
+        participants: match.participants,
       };
     });
     setListObject(list);
@@ -70,11 +74,16 @@ function Index() {
   }, [listObject]);
 
   return (
-    <form>
-      <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} />
-      <button type="submit" onClick={getSummonerId}>Buscar</button>
-    </form>
-
+    <div className="search-container">
+      <form>
+        <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} autoComplete="off" required />
+        <button type="submit" onClick={getSummonerId}>
+          <IconContext.Provider value={searchIcon}>
+            <MdOutlinePersonSearch />
+          </IconContext.Provider>
+        </button>
+      </form>
+    </div>
   );
 }
 
