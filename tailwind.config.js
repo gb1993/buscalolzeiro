@@ -15,6 +15,7 @@ module.exports = {
         opaque: '#E4E4EF',
         lightred: '#F07B7B',
         lightblue: '#3d85c6',
+        lightpurple: '#7113c1',
       },
     },
   },
