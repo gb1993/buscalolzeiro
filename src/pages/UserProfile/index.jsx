@@ -1,5 +1,11 @@
 import { useLocation } from 'react-router-dom';
-import { getProfileIcon, getItemIcon, getChampionIcon } from '../../helpers/getStaticData';
+import {
+  getProfileIcon,
+  getItemIcon,
+  getChampionIcon,
+  addDot,
+} from '../../helpers/getStaticData';
+import Participants from '../../components/Participants';
 import './index.css';
 
 function UserProfile() {
@@ -14,8 +20,6 @@ function UserProfile() {
     }
     return ('bg-lightblue');
   };
-
-  const addDot = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   return (
     <div className="profile-container">
@@ -32,11 +36,11 @@ function UserProfile() {
       <ul>
         {state.profileData.map((match) => (
           <li key={match.id} className={`${handleColor(match.me.win, match.gameDuration)}`}>
-            <div className="w-36">
+            <div className="list-section-container">
               <p>{match.gameMode}</p>
               <p>{`${match.gameDuration} minutos`}</p>
             </div>
-            <div>
+            <div className="list-section-container">
               <div className="flex">
                 <div>
                   <img
@@ -61,19 +65,14 @@ function UserProfile() {
                 {getItemIcon(match.me.item6) === undefined ? <div className="h-8 w-8 rounded-lg bg-black/50" /> : <img src={getItemIcon(match.me.item6)} alt="item 7" />}
               </div>
             </div>
-            <div>
+            <div className="list-section-container">
               <p>{`Gold: ${addDot(match.me.goldEarned)}`}</p>
               <p>{`Dano Aplicado: ${addDot(match.me.totalDamageDealtToChampions)}`}</p>
               <p>{`Dano Recebido: ${addDot(match.me.totalDamageTaken)}`}</p>
               <p>{`Farm: ${match.me.totalMinionsKilled}`}</p>
               <p>{`Pontuação de Visão: ${match.me.visionScore}`}</p>
             </div>
-            {/* <div>
-
-            </div>
-            <div>
-
-            </div> */}
+            <Participants participants={match.participants} />
           </li>
         ))}
       </ul>

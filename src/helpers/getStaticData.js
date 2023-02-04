@@ -14,9 +14,12 @@ const getProfileIcon = (id) => `http://ddragon.leagueoflegends.com/cdn/13.1.1/im
 
 const getItemIcon = (id) => (id === 0 ? undefined : `http://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/${id}.png`);
 
+const addDot = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
 export {
   getMaps,
   getChampionIcon,
   getProfileIcon,
   getItemIcon,
+  addDot,
 };

@@ -1,0 +1,11 @@
+.participants-list-container {
+  @apply gap-6;
+}
+
+.participants-list-container img {
+  @apply w-6 rounded-full;
+}
+
+.participants-list-container div {
+  @apply flex items-center text-xs;
+}
