@@ -4,6 +4,7 @@ import { IconContext } from 'react-icons';
 import { MdOutlinePersonSearch } from 'react-icons/md';
 import { getSummoner, getMatches, getMatchesLogs } from '../../helpers';
 import { getMaps } from '../../helpers/getStaticData';
+import Loading from '../../components/Loading';
 import './index.css';
 
 function Index() {
@@ -12,6 +13,7 @@ function Index() {
   const [summonerInfo, setSummonerInfo] = useState();
   const [allMatches, setAllMatches] = useState();
   const [listObject, setListObject] = useState();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const searchIcon = useMemo(() => ({ className: 'search-icon' }), []);
 
@@ -40,6 +42,7 @@ function Index() {
 
   const getSummonerId = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = await getSummoner(summonerName);
     if (data.message && summonerName) {
       return data.message;
@@ -65,8 +68,10 @@ function Index() {
   }, [allMatches]);
 
   const checkList = () => {
-    if (listObject !== undefined) navigate('/user-profile', { state: { profileData: listObject, summonerInfo } });
-    return null;
+    if (listObject !== undefined) {
+      navigate('/user-profile', { state: { profileData: listObject, summonerInfo } });
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -75,14 +80,17 @@ function Index() {
 
   return (
     <div className="search-container">
-      <form>
-        <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} autoComplete="off" required />
-        <button type="submit" onClick={getSummonerId}>
-          <IconContext.Provider value={searchIcon}>
-            <MdOutlinePersonSearch />
-          </IconContext.Provider>
-        </button>
-      </form>
+      {loading ? <Loading />
+        : (
+          <form>
+            <input type="text" name="summoner" id="summoner" onChange={(e) => setsummonerName(e.target.value)} autoComplete="off" required />
+            <button type="submit" onClick={getSummonerId}>
+              <IconContext.Provider value={searchIcon}>
+                <MdOutlinePersonSearch />
+              </IconContext.Provider>
+            </button>
+          </form>
+        )}
     </div>
   );
 }
