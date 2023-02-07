@@ -1,10 +1,10 @@
 function Loading() {
   return (
     <lottie-player
-      style={{ width: '200px' }}
-      src="https://assets8.lottiefiles.com/packages/lf20_4zarmnt6.json"
+      style={{ width: '300px' }}
+      src="https://assets8.lottiefiles.com/packages/lf20_x62chJ.json"
       background="transparent"
-      speed="0.7"
+      speed="1"
       loop
       autoplay
     />
