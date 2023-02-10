@@ -30,8 +30,20 @@ const getMatchesLogs = async (matchesIds) => {
   return Promise.all(promises);
 };
 
+const getRank = async (id) => {
+  try {
+    const API_URL = `https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { error, message: 'Sem Rank' };
+  }
+};
+
 export {
   getSummoner,
   getMatches,
   getMatchesLogs,
+  getRank,
 };

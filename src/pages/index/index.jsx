@@ -2,7 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { MdOutlinePersonSearch } from 'react-icons/md';
-import { getSummoner, getMatches, getMatchesLogs } from '../../helpers';
+import {
+  getSummoner, getMatches, getMatchesLogs, getRank,
+} from '../../helpers';
 import { getMaps } from '../../helpers/getStaticData';
 import Loading from '../../components/Loading';
 import './index.css';
@@ -11,6 +13,7 @@ function Index() {
   const [maps, setMaps] = useState();
   const [summonerName, setsummonerName] = useState();
   const [summonerInfo, setSummonerInfo] = useState();
+  const [myRank, setMyRank] = useState();
   const [allMatches, setAllMatches] = useState();
   const [listObject, setListObject] = useState();
   const [loading, setLoading] = useState(false);
@@ -40,6 +43,11 @@ function Index() {
     getMatchesLog(matchesIds);
   };
 
+  const getRanking = async (id) => {
+    const rank = await getRank(id);
+    setMyRank(rank);
+  };
+
   const getSummonerId = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -49,6 +57,7 @@ function Index() {
     }
     setSummonerInfo(data);
     getMatchesIds(data.puuid);
+    getRanking(data.id);
     return null;
   };
 
@@ -69,7 +78,7 @@ function Index() {
 
   const checkList = () => {
     if (listObject !== undefined) {
-      navigate('/user-profile', { state: { profileData: listObject, summonerInfo } });
+      navigate('/user-profile', { state: { profileData: listObject, summonerInfo, myRank } });
       setLoading(false);
     }
   };

@@ -13,12 +13,20 @@ function UserProfile() {
 
   const handleColor = (isWin, time) => {
     if (time < 3) {
-      return ('bg-neutral');
+      return ('bg-neutral/70');
     }
     if (isWin === false) {
-      return ('bg-lightred');
+      return ('bg-lightred/70');
     }
-    return ('bg-lightblue');
+    return ('bg-lightblue/70');
+  };
+
+  const checkKDA = (kills, deaths, assists) => {
+    const result = (kills + assists) / deaths;
+    if (Number.isNaN(result)) {
+      return 0;
+    }
+    return result.toFixed(2);
   };
 
   return (
@@ -52,7 +60,9 @@ function UserProfile() {
                 </div>
                 <div>
                   <p>{`${match.me.kills} / ${match.me.deaths} / ${match.me.assists}`}</p>
-                  <p>{((match.me.kills + match.me.assists) / match.me.deaths).toFixed(2)}</p>
+                  <p>
+                    {checkKDA(match.me.kills, match.me.deaths, match.me.assists)}
+                  </p>
                 </div>
               </div>
               <div className="items-container">
