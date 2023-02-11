@@ -7,6 +7,15 @@ import {
 } from '../../helpers/getStaticData';
 import Participants from '../../components/Participants';
 import './index.css';
+import iron from '../../assets/images/ranked-emblem/emblem-bronze.png';
+import bronze from '../../assets/images/ranked-emblem/emblem-iron.png';
+import silver from '../../assets/images/ranked-emblem/emblem-silver.png';
+import gold from '../../assets/images/ranked-emblem/emblem-gold.png';
+import platinum from '../../assets/images/ranked-emblem/emblem-platinum.png';
+import diamond from '../../assets/images/ranked-emblem/emblem-diamond.png';
+import master from '../../assets/images/ranked-emblem/emblem-master.png';
+import grandmaster from '../../assets/images/ranked-emblem/emblem-grandmaster.png';
+import challenger from '../../assets/images/ranked-emblem/emblem-challenger.png';
 
 function UserProfile() {
   const { state } = useLocation();
@@ -29,9 +38,37 @@ function UserProfile() {
     return result.toFixed(2);
   };
 
+  const checkRank = (tier) => {
+    switch (tier) {
+      case 'IRON':
+        return iron;
+      case 'BRONZE':
+        return bronze;
+      case 'SILVER':
+        return silver;
+      case 'GOLD':
+        return gold;
+      case 'PLATINUM':
+        return platinum;
+      case 'DIAMOND':
+        return diamond;
+      case 'MASTER':
+        return master;
+      case 'GRANDMASTER':
+        return grandmaster;
+      case 'CHALLENGER':
+        return challenger;
+      default: return 'Sem Rank';
+    }
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-user-container">
+        <div>
+          <img src={checkRank(state.myRank.length > 0 ? state.myRank[0].tier : 'sem rank')} alt="Tier icon" />
+          <p>{state.myRank[0].queueType}</p>
+        </div>
         <div className="profile-icon-container">
           <img src={getProfileIcon(state.summonerInfo.profileIconId)} alt="user icon" />
           <p>{state.summonerInfo.summonerLevel}</p>
