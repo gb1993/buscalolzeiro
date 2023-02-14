@@ -18,8 +18,8 @@
   @apply flex;
 }
 
-.profile-user-container button {
-
+.profile-icon-container {
+  @apply flex;
 }
 
 .profile-icon-container img {
