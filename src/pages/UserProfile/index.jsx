@@ -65,13 +65,17 @@ function UserProfile() {
   return (
     <div className="profile-container">
       <div className="profile-user-container">
-        <div>
-          <img src={checkRank(state.myRank.length > 0 ? state.myRank[0].tier : 'sem rank')} alt="Tier icon" />
-          <p>{state.myRank[0].queueType}</p>
-        </div>
         <div className="profile-icon-container">
-          <img src={getProfileIcon(state.summonerInfo.profileIconId)} alt="user icon" />
-          <p>{state.summonerInfo.summonerLevel}</p>
+          <div>
+            <p>{state.myRank[0].queueType}</p>
+            <img src={checkRank(state.myRank.length > 0 ? state.myRank[0].tier : 'sem rank')} alt="Tier icon" />
+            <p>{`${state.myRank[0].tier} ${state.myRank[0].rank}`}</p>
+            <span>{`${state.myRank[0].wins} | ${state.myRank[0].losses}`}</span>
+          </div>
+          <div>
+            <img src={getProfileIcon(state.summonerInfo.profileIconId)} alt="user icon" />
+            <p>{state.summonerInfo.summonerLevel}</p>
+          </div>
         </div>
         <div>
           <h3>{state.summonerInfo.name}</h3>
