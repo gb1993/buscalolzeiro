@@ -18,16 +18,12 @@
   @apply flex;
 }
 
-.profile-user-container button {
-
+.refresh-user-data {
+  @apply border-none w-40 py-2 rounded-lg hover:bg-lightbluehover;
 }
 
 .profile-icon-container img {
   @apply rounded-lg;
-}
-
-.profile-icon-container p {
-
 }
 
 .items-container {

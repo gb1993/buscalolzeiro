@@ -75,7 +75,7 @@ function UserProfile() {
         </div>
         <div>
           <h3>{state.summonerInfo.name}</h3>
-          <button type="button">Atualizar Dados</button>
+          <button type="button" className="refresh-user-data bg-lightblue">Atualizar Dados</button>
         </div>
       </div>
       <ul>
